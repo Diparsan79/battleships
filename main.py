@@ -3,22 +3,27 @@ def render(board_width, board_height, shots):
     header = "+" + "-" * board_height + "+"
     print(header)
     
+    shots_set = set(shots)
     for y in range(board_height):
         row = []
         for x in range(board_width):
-            if (x,y) in shots:
+            if (x,y) in shots_set:
                 ch = "X"
             else:
                 ch = " "
             row.append(ch)
         print("|"+ "".join(row) + "|")
-        
+
     print(header)
 
 if __name__ =="__main__":
-    render(10,10,[(3,1), (4,5), (8,1)])
+    shots = []
+    while True:
+    
+        inp = input("Where do you want to shoot? \n")
+        xstr, ystr = inp.split(",")
+        x = int(xstr)
+        y = int(ystr)
 
-    inp = input("Where do you want to shoot? \n")
-    xstr, ystr = inp.split(",")
-    x = int(xstr)
-    y = int(ystr)
+        shots.append((x,y))
+        render(10,10,shots)
